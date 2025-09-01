@@ -1,0 +1,7 @@
+project:
+  name: Git Automatisation
+  description: A conglomerate of automation resources related to Git, including Git hooks and GitHub workflows
+  github: https://github.com/kvn-dtrx/git-automatisation
+  authors:
+    - name: Kvn Dtrx
+      mail: kvn.dtrx+git@protonmail.ch
