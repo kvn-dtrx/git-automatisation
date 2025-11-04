@@ -15,4 +15,3 @@
   entry: ./scripts/are-filenames-formatted.bash
   language: system
   files: ^.*$
-

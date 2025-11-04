@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 # ---
-# description: | 
+# description: |
 #   Derives a one-commit version of a repository with GitHub origin path
 #   and pushes it to GitHub.
 # ---
@@ -26,11 +26,11 @@ cd "${tmp_dir}"
 
 src_origin_url="$(
     git -C "${SRC_REPO}" remote get-url origin
-)"  
+)"
 src_repo_name="$(basename -s .git "${src_origin_url}")"
 default_branch="main"
 username="$(
-    echo "${src_origin_url}" | 
+    echo "${src_origin_url}" |
         gsed -E 's#.*github\.com[:/](.+?)/.*#\1#'
 )"
 target_repo_name="${src_repo_name}${PUB_SUFFIX}"
@@ -44,7 +44,7 @@ tree_sha="$(
 # Creates a new commit with that tree and no parent.
 commit_msg="init: Create Clean Snapshot @ $(gdate "+%Y-%m-%dT%H:%M:%S")"
 new_commit_sha="$(
-    echo "${commit_msg}" | 
+    echo "${commit_msg}" |
         git commit-tree "${tree_sha}"
 )"
 
@@ -52,7 +52,7 @@ new_commit_sha="$(
 # Since we are on ${default_branch}, git demands detaching first.
 git checkout --detach
 git branch -f "${default_branch}" "${new_commit_sha}"
-git switch "${default_branch}" 
+git switch "${default_branch}"
 
 git remote set-url origin "${target_url}"
 
