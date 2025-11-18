@@ -5,7 +5,8 @@
 #   Fixups all commits between annotated tags into a single commit.
 # ---
 
-set -e
+set -o errexit
+set -o nounset
 
 BOT_NAME="Bot"
 BOT_EMAIL="bot@invalid"

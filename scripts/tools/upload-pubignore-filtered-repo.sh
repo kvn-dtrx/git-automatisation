@@ -6,7 +6,8 @@
 #   The `.pubignore` file of the repository serves as blacklist.
 # ---
 
-set -e
+set -o errexit
+set -o nounset
 
 PUBIGNORE_NAME=".pubignore"
 REPO_PRIV_URL="https://github.com/kvn-dtrx/xperiments"
@@ -35,11 +36,13 @@ git clone \
         exit 0
     fi
 
+    # Retains only file that are not (`--invert-paths`) listed in the pubignore file.
     git filter-repo \
         --force \
         --invert-paths \
         --paths-from-file "${PUBIGNORE_NAME}"
 
+    # Retains all files but not (`--invert-paths`) the pubignore file.
     git filter-repo \
         --force \
         --invert-paths \

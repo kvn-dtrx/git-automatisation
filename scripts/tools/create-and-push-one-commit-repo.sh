@@ -6,7 +6,8 @@
 #   and pushes it to GitHub.
 # ---
 
-set -e
+set -o errexit
+set -o nounset
 
 SRC_REPO="${1}"
 PUB_SUFFIX="_pub"

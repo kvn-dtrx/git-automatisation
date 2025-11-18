@@ -7,7 +7,7 @@
 # ---
 
 # In this context, very informative:
-# [[https://blog.tinned-software.net/remove-files-from-git-history]]
+# <https://blog.tinned-software.net/remove-files-from-git-history>
 
 # ---
 
@@ -28,12 +28,12 @@ for arg in "${@}"; do
         # Fetches all ignored files and removes them from affected commits
         git status --ignored --porcelain |
             awk '/[^\/]$/ {print $2}' |
-            while IFS=$'\n' readline -r ignored_file; do
+            while IFS=" " readline -r ignored_file; do
                 git filter-branch \
                     --prune-empty \
-                    --index-filter "git rm --cached --ignore-unmatch ${file}" \
+                    --index-filter "git rm --cached --ignore-unmatch ${ignored_file}" \
                     -- --all
-                # WARNING: `git rm` without `--cached` is (often) simply rm with some git management!
+                # WARNING: `git rm` without `--cached` is (often) simply rm plus some git management!
             done
 
         # # NOTE: The list of files that are currently tracked would be returned by
