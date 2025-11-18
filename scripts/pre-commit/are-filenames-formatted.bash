@@ -10,10 +10,10 @@
 
 failed=0
 
-while IFS='' read -r -d '' file; do
+while IFS="" read -r -d "" file; do
     # Check for whitespace in the filename
     if [[ "${file}" =~ [[:space:]] || "${file}" =~ [A-Z] ]]; then
-        echo ️"File name with white spaces or uppercase characters found:"
+        echo "File name with white spaces or uppercase characters found:"
         echo "  ${file}"
         failed=1
     fi

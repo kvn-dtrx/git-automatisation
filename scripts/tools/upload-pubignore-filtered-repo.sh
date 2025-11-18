@@ -16,7 +16,7 @@ REFERENCE="pub-mirror"
 
 repo_pub_url="${REPO_PRIV_URL}${REPO_PUB_SUFFIX}"
 
-repo_tmp_dir=$(mktemp -d -t repo-to-mirror.XXX)
+repo_tmp_dir="$(mktemp -d -t repo-to-mirror.XXX)"
 
 git clone \
     --branch main \

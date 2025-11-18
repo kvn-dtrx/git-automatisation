@@ -18,7 +18,7 @@ if sed --version >/dev/null 2>&1; then
 else
     # BSD sed (macOS)
     sedi() {
-        sed -i '' "$@"
+        sed -i "" "$@"
     }
 fi
 
@@ -30,6 +30,6 @@ fi
 
 # Remove trailing whitespaces if necessary.
 if grep -q '[[:space:]]$' "${commit_msg_file}"; then
-    sedi '' 's/[[:space:]]*$//' "${commit_msg_file}"
+    sedi "" 's/[[:space:]]*$//' "${commit_msg_file}"
     echo "Trailing whitespace removed."
 fi
