@@ -48,7 +48,7 @@ git clone \
         --invert-paths \
         --path "${PUBIGNORE_NAME}"
 
-    if ! gh repo view "${repo_pub_url}" >/dev/null 2>&1; then
+    if ! gh repo view "${repo_pub_url}" > /dev/null 2>&1; then
         gh repo create "${repo_pub_url}" --public
     fi
 

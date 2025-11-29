@@ -8,15 +8,17 @@
 
 failed=0
 
-if [[ -z "${BASE_SHA:-}" || -z "${HEAD_SHA:-}" ]]; then
-    echo "BASE_SHA and HEAD_SHA must be set."
-    echo "Perhaps the script is not run in the context of a pull request?"
+if [ -z "${BASE_SHA:-}" ] || [ -z "${HEAD_SHA:-}" ]; then
+    printf "%s\n" \
+        "BASE_SHA and HEAD_SHA must be set." \
+        "Perhaps the script is not run in the context of a pull request?" \
+        >&2
     exit 1
 fi
 
 echo "Notebook with uncleared output cells:"
 
-while IFS="" read -r -d "" notebook; do
+while IFS="" read -r notebook; do
     if [ -n "$(jq '.cells[] | select(.outputs | length > 0)' "$notebook")" ]; then
         echo "  ${notebook}"
         failed=1

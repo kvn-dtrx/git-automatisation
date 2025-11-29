@@ -31,8 +31,8 @@ src_origin_url="$(
 src_repo_name="$(basename -s .git "${src_origin_url}")"
 default_branch="main"
 username="$(
-    echo "${src_origin_url}" |
-        gsed -E 's#.*github\.com[:/](.+?)/.*#\1#'
+    printf "%s" "${src_origin_url}" |
+        sed -E -e "s#.*github\.com[:/](.+?)/.*#\1#"
 )"
 target_repo_name="${src_repo_name}${PUB_SUFFIX}"
 target_url="git@github.com:${username}/${target_repo_name}.git"

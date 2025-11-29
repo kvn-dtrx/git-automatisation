@@ -5,6 +5,8 @@
 #   Fixups all commits between annotated tags into a single commit.
 # ---
 
+# ---
+
 set -o errexit
 set -o nounset
 
@@ -55,7 +57,7 @@ fi
 
 # Gets all annotated tags sorted by date.
 tags=()
-while IFS= read -r line; do
+while IFS="" read -r line; do
     tags+=("${line}")
 done < <(
     for tag in $(git tag --sort=creatordate); do
@@ -82,7 +84,7 @@ git checkout -b "${branch_tmp}" "${tags[0]}"
 
 # Iterates over all intervals and fixups the changes.
 for interval in "${intervals[@]}"; do
-    IFS='|' read -r tag_start tag_end author_date <<<"${interval}"
+    IFS="|" read -r tag_start tag_end author_date <<< "${interval}"
     echo "Squashing changes between ${tag_start} and ${tag_end}"
     git reset --hard "${tag_start}"
     git merge --squash "${tag_end}"
@@ -99,7 +101,7 @@ for interval in "${intervals[@]}"; do
     fi
     cmt_msg="${cmt_msg_head}${cmt_msg_tail}"
     env "${git_env_vars[@]}" git commit --allow-empty -m "${cmt_msg}"
-done >/dev/null
+done > /dev/null
 
 # Moves pointer of output branch and deletes the temporary branch.
 git checkout "${BRANCH_TAR}"
@@ -107,7 +109,7 @@ git reset --hard "${branch_tmp}"
 
 # Deletes all local branches except target branch.
 for branch in $(git branch | sed 's/*//'); do
-    if [[ "${branch}" != "${BRANCH_TAR}" ]]; then
+    if [ "${branch}" != "${BRANCH_TAR}" ]; then
         git branch -D "${branch}"
     fi
 done

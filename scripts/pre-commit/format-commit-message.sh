@@ -10,7 +10,7 @@
 commit_msg_file="${1}"
 
 # Detect the sed version or operating system
-if sed --version >/dev/null 2>&1; then
+if sed --version > /dev/null 2>&1; then
     # GNU sed (Linux)
     sedi() {
         sed -i "$@"

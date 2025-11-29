@@ -28,7 +28,7 @@ for arg in "${@}"; do
         # Fetches all ignored files and removes them from affected commits
         git status --ignored --porcelain |
             awk '/[^\/]$/ {print $2}' |
-            while IFS=" " readline -r ignored_file; do
+            while IFS="" read -r ignored_file; do
                 git filter-branch \
                     --prune-empty \
                     --index-filter "git rm --cached --ignore-unmatch ${ignored_file}" \

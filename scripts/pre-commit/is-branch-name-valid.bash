@@ -28,7 +28,7 @@ else
     branch_name="$(git rev-parse --abbrev-ref HEAD)"
 fi
 
-if [[ ! "${branch_name}" =~ ${branch_pattern} ]]; then
+if ! printf '%s\n' "${branch_name}" | grep -E -q "${branch_pattern}"; then
     echo "Branch name is not well formatted:"
     echo "  ${branch_name}"
     echo "Branch names should match the regexp:"
