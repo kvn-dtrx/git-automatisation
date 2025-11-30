@@ -13,23 +13,23 @@ commit_msg_file="${1}"
 if sed --version > /dev/null 2>&1; then
     # GNU sed (Linux)
     sedi() {
-        sed -i "$@"
+        sed -i "${@}"
     }
 else
     # BSD sed (macOS)
     sedi() {
-        sed -i "" "$@"
+        sed -i "" "${@}"
     }
 fi
 
 # Remove leading whitespaces in the first line if necessary.
-if head -n 1 "${commit_msg_file}" | grep -q '^[[:space:]]'; then
+if head -n 1 "${commit_msg_file}" | grep -q "^[[:space:]]"; then
     sedi '1s/^[[:space:]]*//' "${commit_msg_file}"
     echo "Leading whitespace removed from the first message line."
 fi
 
 # Remove trailing whitespaces if necessary.
-if grep -q '[[:space:]]$' "${commit_msg_file}"; then
+if grep -q "[[:space:]]$" "${commit_msg_file}"; then
     sedi "" 's/[[:space:]]*$//' "${commit_msg_file}"
     echo "Trailing whitespace removed."
 fi

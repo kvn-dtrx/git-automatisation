@@ -19,7 +19,7 @@ fi
 echo "Notebook with uncleared output cells:"
 
 while IFS="" read -r notebook; do
-    if [ -n "$(jq '.cells[] | select(.outputs | length > 0)' "$notebook")" ]; then
+    if [ -n "$(jq '.cells[] | select(.outputs | length > 0)' "${notebook}")" ]; then
         echo "  ${notebook}"
         failed=1
     fi

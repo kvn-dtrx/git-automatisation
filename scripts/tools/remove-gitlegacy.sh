@@ -41,7 +41,7 @@ for arg in "${@}"; do
 
         # Deletes remaining references in old histories
         git for-each-ref \
-            --format 'delete %(refname)' refs/original |
+            --format "delete %(refname)" refs/original |
             git update-ref --stdin
 
         git reflog expire --expire="now" --all

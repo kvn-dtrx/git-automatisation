@@ -67,7 +67,7 @@ set -- "${@:-.}"
 # Finds all (including symlinked) files that are not subordinate
 # to a hidden directory.
 find -L "${@}" \
-    \( -type d -path '*/.*' -prune \) -o \
+    \( -type d -path "*/.*" -prune \) -o \
     \( -type f -print \)
 
 # ---
