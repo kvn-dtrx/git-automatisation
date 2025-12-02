@@ -1,9 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # ---
 # description: |
 #   Checks whether output cells of all iPy notebooks are cleared.
 #   Intended to be used as a GitHub workflow run on pull requests.
+# ---
+
 # ---
 
 failed=0

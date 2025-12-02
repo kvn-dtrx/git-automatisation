@@ -1,9 +1,11 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 # ---
 # description: |
 #   Formats the commit message.
 #   Intended to be used as a commit-msg hook.
+# ---
+
 # ---
 
 # File containing the commit message.
