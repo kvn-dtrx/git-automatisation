@@ -6,13 +6,11 @@ repos:
         entry: ./scripts/format-commit-message.sh
         language: system
         files: ^$
-
       # - id: pushes-to-protected-branch
       #   name: Pushes to Protected Branch
       #   entry: ./scripts/pushes-to-protected-branch.sh
       #   language: system
       #   files: ^$
-
       - id: are-filenames-formatted
         name: Are Filenames Formatted
         entry: ./scripts/are-filenames-formatted.bash
