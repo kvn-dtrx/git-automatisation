@@ -2,9 +2,10 @@
 
 # ---
 # description: |
-#   Checks whether the push operation targets a protected branch.
-#   Intended to be used as a pre-push hook.
+#   Checks whether the push operation targets a protected branch
 # ---
+
+# NOTE: Script is intended to be run as git pre-push hook
 
 # ---
 

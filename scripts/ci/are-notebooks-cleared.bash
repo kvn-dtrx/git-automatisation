@@ -2,9 +2,10 @@
 
 # ---
 # description: |
-#   Checks whether output cells of all iPy notebooks are cleared.
-#   Intended to be used as a GitHub workflow run on pull requests.
+#   Checks whether output cells of all iPy notebooks are cleared
 # ---
+
+# NOTE: Script is intended to be run as GitHub workflow on pull requests
 
 # ---
 

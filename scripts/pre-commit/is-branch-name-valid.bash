@@ -2,8 +2,11 @@
 
 # ---
 # description: |
-#   Checks whether the branch name is well formatted.
-#   Intended to be used as a pre-commit hook.
+#   Checks whether the branch name is well formatted
+# ---
+
+# NOTE: Script is intended to be run as git pre-commit hook
+
 # ---
 
 branch_pattern=""

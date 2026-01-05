@@ -2,8 +2,11 @@
 
 # ---
 # description: |
-#   Checks whether a commit contains ignored files.
-#   Intended to be used as a pre-commit hook.
+#   Checks whether a commit contains ignored files
+# ---
+
+# NOTE: Script is intended to be run as git pre-commit hook
+
 # ---
 
 ignored_files=$(

@@ -2,7 +2,7 @@
 
 # ---
 # description: |
-#   Fixups all commits between annotated tags into a single commit.
+#   Fixups all commits between annotated tags into a single commit
 # ---
 
 # ---
@@ -30,32 +30,32 @@ git clone \
 cd "${repo_tmp_path}"
 
 branch_tmp="__tmp__/fixup"
-# Deletes the temporary branch if it exists.
+# Deletes the temporary branch if it exists
 if git show-ref --verify --quiet "refs/heads/${branch_tmp}"; then
     git branch -D "${branch_tmp}"
 fi
 
-# Adds tag to initial commit if missing.
+# Adds tag to initial commit if missing
 initial_cmt="$(git rev-list --max-parents=0 HEAD)"
 if ! git tag --points-at "${initial_cmt}" | grep -q .; then
     git tag -a v0.0.0 -m "Initial Commit" "${initial_cmt}"
 fi
 
-# Adds tag to current commit if missing.
-# NOTE: Perhaps it is better to tag all leaf commits.
-# or to prune after tags having no ancestor tag.
+# Adds tag to current commit if missing
+# NOTE: Perhaps it is better to tag all leaf commits
+# or to prune after tags having no ancestor tag
 current_cmt="$(git rev-parse HEAD)"
 if ! git tag --points-at "${current_cmt}" | grep -q .; then
     git tag -a v9999.9999.9999 -m "Current Commit" "${current_cmt}"
 fi
 
-# Checks the very unlikely case that the current commit is the initial commit.
+# Checks the very unlikely case that the current commit is the initial commit
 if [ "${current_cmt}" == "${initial_cmt}" ]; then
     echo "Current commit is the initial commit. Nothing to squash."
     exit 0
 fi
 
-# Gets all annotated tags sorted by date.
+# Gets all annotated tags sorted by date
 tags=()
 while IFS="" read -r line; do
     tags+=("${line}")
@@ -79,10 +79,10 @@ for ((i = 0; i < "${#tags[@]}" - 1; i++)); do
     intervals+=("${start}|${end}|${author_date}")
 done
 
-# Starts a new branch at the oldest tag.
+# Starts a new branch at the oldest tag
 git checkout -b "${branch_tmp}" "${tags[0]}"
 
-# Iterates over all intervals and fixups the changes.
+# Iterates over all intervals and fixups the changes
 for interval in "${intervals[@]}"; do
     IFS="|" read -r tag_start tag_end author_date <<< "${interval}"
     echo "Squashing changes between ${tag_start} and ${tag_end}"
@@ -103,7 +103,7 @@ for interval in "${intervals[@]}"; do
     env "${git_env_vars[@]}" git commit --allow-empty -m "${cmt_msg}"
 done > /dev/null
 
-# Moves pointer of output branch and deletes the temporary branch.
+# Moves pointer of output branch and deletes the temporary branch
 git checkout "${BRANCH_TAR}"
 git reset --hard "${branch_tmp}"
 
@@ -114,7 +114,7 @@ for branch in $(git branch | sed 's/*//'); do
     fi
 done
 
-# Deletes all local tags.
+# Deletes all local tags
 git tag -l |
     xargs -r git tag -d
 
@@ -125,11 +125,11 @@ for ref in $(git for-each-ref --format="%(refname)" refs/remotes/); do
 done
 
 # Expires all reflog entries immediately,
-# removing history references to unreachable commits.
+# removing history references to unreachable commits
 git reflog expire --expire=now --all
 
 # Runs garbage collection to permanently delete all unreachable
-# objects (commits, trees, blobs).
+# objects (commits, trees, blobs)
 git gc --prune=now --aggressive
 
 # NOTE: Unreachable objects can be inspected using:
@@ -137,7 +137,7 @@ git gc --prune=now --aggressive
 # git fsck --unreachable
 # ```
 
-# # Clones the repository only with manipulated branch to a new directory.
+# # Clones the repository only with manipulated branch to a new directory
 # git clone \
 #     --branch "${BRANCH_TAR}" \
 #     --single-branch \

@@ -2,8 +2,11 @@
 
 # ---
 # description: |
-#   Checks whether the commit message is well formatted.
-#   Intended to be used as a pre-commit hook.
+#   Checks whether the commit message is well formatted
+# ---
+
+# NOTE: Script is intended to be run as git pre-commit hook
+
 # ---
 
 TYPES=(
@@ -26,7 +29,7 @@ TYPES=(
 )
 
 TYPE_PATTERN="($(
-    IFS='|'
+    IFS="|"
     echo "${TYPES[*]}"
 ))"
 

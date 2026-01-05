@@ -2,9 +2,10 @@
 
 # ---
 # description: |
-#   Formats the commit message.
-#   Intended to be used as a commit-msg hook.
+#   Formats the commit message by removing leading and trailing whitespaces
 # ---
+
+# NOTE: Script is intended to be run as git commit-msg hook
 
 # ---
 
