@@ -2,6 +2,8 @@
 // description: Configuration file for commitlint, which is used to lint commit messages.
 // ---
 
+// ---
+
 module.exports = {
   extends: ['@commitlint/config-conventional'],
   rules: {

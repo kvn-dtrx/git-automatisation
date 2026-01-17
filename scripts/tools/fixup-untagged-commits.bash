@@ -12,18 +12,18 @@ set -o nounset
 
 BOT_NAME="Bot"
 BOT_EMAIL="bot@invalid"
-BRANCH_TAR="main"
+BRANCH_DST="main"
 REPO_TMP_SUFFIX="_tmp"
-REPO_TAR_SUFFIX="_xxx"
+REPO_DST_SUFFIX="_xxx"
 
 repo_src_path="$(git rev-parse --show-toplevel)"
 repo_tmp_path="${repo_src_path}${REPO_TMP_SUFFIX}"
-repo_tar_path="${repo_src_path}${REPO_TAR_SUFFIX}"
+repo_dst_path="${repo_src_path}${REPO_DST_SUFFIX}"
 
 rm -rf "${repo_tmp_path}"
-rm -rf "${repo_tar_path}"
+rm -rf "${repo_dst_path}"
 git clone \
-    --branch "${BRANCH_TAR}" \
+    --branch "${BRANCH_DST}" \
     --single-branch \
     "${repo_src_path}" \
     "${repo_tmp_path}"
@@ -104,12 +104,12 @@ for interval in "${intervals[@]}"; do
 done > /dev/null
 
 # Moves pointer of output branch and deletes the temporary branch
-git checkout "${BRANCH_TAR}"
+git checkout "${BRANCH_DST}"
 git reset --hard "${branch_tmp}"
 
 # Deletes all local branches except target branch.
 for branch in $(git branch | sed 's/*//'); do
-    if [ "${branch}" != "${BRANCH_TAR}" ]; then
+    if [ "${branch}" != "${BRANCH_DST}" ]; then
         git branch -D "${branch}"
     fi
 done
@@ -139,7 +139,7 @@ git gc --prune=now --aggressive
 
 # # Clones the repository only with manipulated branch to a new directory
 # git clone \
-#     --branch "${BRANCH_TAR}" \
+#     --branch "${BRANCH_DST}" \
 #     --single-branch \
 #     "${repo_tmp_path}" \
-#     "${repo_tar_path}"
+#     "${repo_dst_path}"

@@ -17,12 +17,12 @@ PUBIGNORE_NAME=".pubignore"
 REPO_PUB_SUFFIX="-pub"
 
 repo_src_path="$(git rev-parse --show-toplevel)"
-repo_tar_path="${repo_src_path}${REPO_PUB_SUFFIX}"
+repo_dst_path="${repo_src_path}${REPO_PUB_SUFFIX}"
 pubignore_path="${repo_src_path}/${PUBIGNORE_NAME}"
 
-rm -rf "${repo_tar_path}"
-git clone "${repo_src_path}" "${repo_tar_path}"
-cd "${repo_tar_path}" ||
+rm -rf "${repo_dst_path}"
+git clone "${repo_src_path}" "${repo_dst_path}"
+cd "${repo_dst_path}" ||
     exit 1
 
 # Checks whether file exists in HEAD; grep fails when no results are found.

@@ -2,8 +2,8 @@
 
 # ---
 # description: |
-#   Derives a one-commit version of a repository with GitHub origin path
-#   and pushes it to GitHub.
+#   Derives a single-commit version of a repository with GitHub origin path
+#   and pushes it to GitHub
 # ---
 
 set -o errexit
@@ -34,8 +34,8 @@ username="$(
     printf "%s" "${src_origin_url}" |
         sed -E -e "s#.*github\.com[:/](.+?)/.*#\1#"
 )"
-target_repo_name="${src_repo_name}${PUB_SUFFIX}"
-target_url="git@github.com:${username}/${target_repo_name}.git"
+dst_repo_name="${src_repo_name}${PUB_SUFFIX}"
+dst_url="git@github.com:${username}/${dst_repo_name}.git"
 
 # Extracts the tree SHA of the commit.
 tree_sha="$(
@@ -55,22 +55,22 @@ git checkout --detach
 git branch -f "${default_branch}" "${new_commit_sha}"
 git switch "${default_branch}"
 
-git remote set-url origin "${target_url}"
+git remote set-url origin "${dst_url}"
 
 # Checks if origin really was changed as we will force push!
 current_origin_url="$(git remote get-url origin)"
-[ "${current_origin_url}" = "${target_url}" ] || {
+[ "${current_origin_url}" = "${dst_url}" ] || {
     echo "Remote origin URL mismatch." >&2
     echo "Expected:" >&2
-    echo "  ${target_url}" >&2
+    echo "  ${dst_url}" >&2
     echo "Actual:" >&2
     echo "  ${current_origin_url}" >&2
     echo "Aborting to avoid accidental force-push to wrong remote." >&2
     exit 1
 }
 
-if ! gh repo view "${username}/${target_repo_name}" > /dev/null 2>&1; then
-    gh repo create "${username}/${target_repo_name}" --public
+if ! gh repo view "${username}/${dst_repo_name}" > /dev/null 2>&1; then
+    gh repo create "${username}/${dst_repo_name}" --public
 fi
 
 git push --force origin "${default_branch}"
