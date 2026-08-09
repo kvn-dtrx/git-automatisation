@@ -1,8 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # ---
-# description: |
+# description: >-
 #   Checks whether the commit message is well formatted
+# ---
+
 # ---
 
 # NOTE: Script is intended to be run as git pre-commit hook
@@ -40,11 +42,9 @@ COMMIT_MSG_FILE="$1"
 COMMIT_MSG=$(head -n1 "$COMMIT_MSG_FILE")
 
 if ! echo "${COMMIT_MSG}" | grep -Eq "${REGEX}"; then
-    printf "%s\n" \
-        "Invalid commit message format!" \
-        "Commit message must follow Conventional Commits format:" \
-        "  <type>(optional-scope)!: description" \
-        "Allowed types are: ${TYPES[*]}" \
-        >&2
+    echo "Invalid commit message format!"
+    echo "Commit message must follow Conventional Commits format:"
+    echo "  <type>(optional-scope)!: description"
+    echo "Allowed types are: ${TYPES[*]}"
     exit 1
 fi

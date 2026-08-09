@@ -1,8 +1,10 @@
 #!/usr/bin/env sh
 
 # ---
-# description: |
+# description: >-
 #   Checks whether a commit contains ignored files
+# ---
+
 # ---
 
 # NOTE: Script is intended to be run as git pre-commit hook

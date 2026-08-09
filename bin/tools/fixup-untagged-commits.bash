@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # ---
-# description: |
+# description: >-
 #   Fixups all commits between annotated tags into a single commit
 # ---
 

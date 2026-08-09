@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
 # ---
-# description: |
-#   Strips all files from the repository that
-#   are not listed in the `.pubignore` file.
+# description: >-
+#   Strips all files from the repository that are not listed in the
+#   `.pubignore` file
+# ---
+
 # ---
 
 # NOTE: As git does not track renames, older directory and file

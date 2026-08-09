@@ -1,9 +1,11 @@
 #!/usr/bin/env sh
 
 # ---
-# description: |
-#   Makes a clean-up in the specified git repositories
-#   according to the current gitignore files.
+# description: >-
+#   Makes a clean-up in the specified git repositories according to the
+#   current gitignore files
+# ---
+
 # ---
 
 # In this context, very informative:
@@ -31,9 +33,10 @@ for arg in "${@}"; do
             while IFS="" read -r ignored_file; do
                 git filter-branch \
                     --prune-empty \
-                    --index-filter "git rm --cached --ignore-unmatch ${ignored_file}" \
+                    --index-filter "git rm --cached --ignore-unmatch '${ignored_file}'" \
                     -- --all
-                # WARNING: `git rm` without `--cached` is (often) simply rm plus some git management!
+                # WARN: `git rm` without `--cached` is (often) simply
+                # an rm wrapper!
             done
 
         # # NOTE: The list of files that are currently tracked would be returned by

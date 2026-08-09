@@ -1,11 +1,10 @@
 #!/usr/bin/env /bash
 
 # ---
-# description: |
-#   Checks whether names of committed files fulfill the following formatting rules:
-#   - No whitespace.
-#   - No uppercase characters.
-#   Intended to be used as a pre-commit hook.
+# description: >-
+#   Checks whether names of committed files fulfill the following
+#   formatting rules: - No whitespace. - No uppercase characters. Intended
+#   to be used as a pre-commit hook
 # ---
 
 # ---

@@ -1,8 +1,10 @@
 #!/usr/bin/env sh
 
 # ---
-# description: |
+# description: >-
 #   Uploads a filtered version of a repository for public use
+# ---
+
 # ---
 
 # NOTE: The `.pubignore` file of the repository serves as blacklist

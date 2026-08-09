@@ -1,8 +1,10 @@
 #!/bin/bash
 
 # ---
-# description: |
+# description: >-
 #   Checks whether output cells of all iPy notebooks are cleared
+# ---
+
 # ---
 
 # NOTE: Script is intended to be run as git pre-commit hook

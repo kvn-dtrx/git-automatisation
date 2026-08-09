@@ -1,8 +1,11 @@
 #!/usr/bin/env sh
 
 # ---
-# description: |
-#   Formats the commit message by removing leading and trailing whitespaces
+# description: >-
+#   Formats the commit message by removing leading and trailing
+#   whitespaces
+# ---
+
 # ---
 
 # NOTE: Script is intended to be run as git commit-msg hook

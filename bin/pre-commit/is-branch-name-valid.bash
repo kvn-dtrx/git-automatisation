@@ -1,8 +1,10 @@
 #!/bin/bash
 
 # ---
-# description: |
+# description: >-
 #   Checks whether the branch name is well formatted
+# ---
+
 # ---
 
 # NOTE: Script is intended to be run as git pre-commit hook

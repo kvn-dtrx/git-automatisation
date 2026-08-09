@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
 # ---
-# description: |
+# description: >-
 #   Checks whether output cells of all iPy notebooks are cleared
+# ---
+
 # ---
 
 # NOTE: Script is intended to be run as GitHub workflow on pull requests
@@ -30,7 +32,7 @@ while IFS="" read -r notebook; do
     # otherwise changes to the failed variable would be restricted to subshells!.
 done < <(
     git diff --name-only --diff-filter=AM -z "${BASE_SHA}" "${HEAD_SHA}" |
-        grep -z '\.ipynb$' || true
+        grep -z '\.ipynb$' || :
 )
 
 if [ "${failed}" -gt 0 ]; then

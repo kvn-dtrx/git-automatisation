@@ -1,14 +1,15 @@
-# shellcheck shell=bash
+# shellcheck disable=all
 
 # ---
-# description:
+# description: >-
+#   Runs common snippets
 # ---
 
 # ---
 
 # Checks whether the script is executed as root
 [ "$(id -u)" -ne 0 ] && {
-    echo "***** Run this script as root *****"
+    printf "Run this script as root" >&2
     exit 1
 }
 
@@ -77,13 +78,12 @@ project_dir="$(git rev-parse --show-toplevel)"
 # ---
 
 # Creates an application related temporary directory
-script_tmp_dir="${TMPDIR:-/tmp}/${script_name}"
-mkdir -p "${script_tmp_dir}"
-tmp_dir="$(mktemp -d -p "${script_tmp_dir}/tmp.$(date "+%H%M%S").XXXXXX")"
+tmp_dir="${XDG_RUNTIME_DIR:-${TMPDIR:-/tmp}}"
+mkdir -p "${tmp_dir}"
+tmp_stem="${script_name}.$(date "+%Y%m%d-%H%M%S")"
+tmp_dir="$(mktemp -d "${tmp_dir}/${tmp_stem}.XXXXXXX")"
 
-# NOTE: mktemp does not create missing parents
-
-# NOTE: We adhere to the convention of using XXXXXX as prefix length—six times X!
+# NOTE: We adhere to the convention of using XXXXXXX as prefix length—seven times X!
 
 # Removes the temporary directory associated with the
 # current run of the script
@@ -91,12 +91,14 @@ trap 'rm -rf -- "${tmp_dir}"' EXIT INT TERM
 
 # ---
 
-# Creates an application related backup directory
-script_bkp_dir="${XDG_STATE_HOME}/${script_name}"
-mkdir -p "${script_bkp_dir}"
-bkp_dir="$(
-    mktemp -d -p "${script_bkp_dir}" "bkp.$(date "+%y%m%dt%H%M%S").XXXXXX"
+# Creates an application related state directory
+parent_state_dir="${XDG_STATE_HOME:-${HOME}/.local/state}/${script_name}"
+mkdir -p "${parent_state_dir}"
+state_stem="$(date "+%y%m%d-%H%M%S")"
+state_dir="$(
+    mktemp -d "${parent_state_dir}/${state_stem}.XXXXXXX"
 )"
+# NOTE: mktemp does not create missing parents
 
 # ---
 

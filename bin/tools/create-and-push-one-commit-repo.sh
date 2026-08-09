@@ -1,9 +1,11 @@
 #!/usr/bin/env sh
 
 # ---
-# description: |
-#   Derives a single-commit version of a repository with GitHub origin path
-#   and pushes it to GitHub
+# description: >-
+#   Derives a single-commit version of a repository with GitHub origin
+#   path and pushes it to GitHub
+# ---
+
 # ---
 
 set -o errexit
@@ -12,8 +14,8 @@ set -o nounset
 SRC_REPO="${1}"
 PUB_SUFFIX="_pub"
 
-tmp_dir="$(mktemp -d)"
-# tmp_dir="${HOME}/Downloads/foo"
+# tmp_dir="$(mktemp -d)"
+tmp_dir="${HOME}/Downloads/foo"
 rm -rf "${tmp_dir}"
 
 [ -n "${SRC_REPO}" ] || {
